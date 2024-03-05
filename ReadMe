@@ -1,0 +1,125 @@
+///////////////////Docker///////////////
+docker run --name postgresc -p 5432:5432 -e POSTGRES_USER=satyam -e POSTGRES_PASSWORD=S@ty@m@953 -d postgres
+
+docker exec -it postgresc bash
+
+
+
+
+///////////////////Docker///////////////
+
+///////////////////bash Postgres///////////////
+
+psql -h localhost -U postgres
+
+\l
+\du
+CREATEUSER Satyam WITH PASSWORD 'S@ty@m@953'
+postgres-# GRANT CONNECT ON DATABASE debugmethodspgdb TO Satyam
+postgres-# GRANT pg_read_all_data  TO Satyam
+postgres-# GRANT pg_write_all_data TO Satyam
+
+///////////////////Postgres?///////////////
+* npm run strapi help export
+* npm run strapi generate >middleware>api
+* npm run strapi console >type strapi.middlewares
+///////////////////Strapi Querry?///////////////
+{
+  populate: (
+    metadata: {
+      populate: {
+        metaImage: (
+          populate: true,
+          }
+        }
+      }
+    },
+}
+// http://localhost:1337/api/landing-pages?populate[metadata][populate][image][populate]=true
+
+{
+  populate: {
+    metadata: {
+      populate: {
+        image: {
+          populate: true,
+          fields: ["name", "alternativeText","url"],
+          }
+        }
+      }
+    }
+}
+///api/landing-pages?populate[metadata][populate][image][populate]=true&populate[metadata][populate][image][fields][0]=name&populate[metadata][populate][image][fields][1]=alternativeText&populate[metadata][populate][image][fields][2]=url
+
+
+{
+  populate: {
+    metadata: {
+      populate: {
+        image: {
+          populate: true,
+          fields: ["name", "alternativeText","url"],
+        }
+      }
+    },
+    blocks: {
+      populate: {
+        link:{
+          populate: true
+        },
+        image: {
+          fields: ["name", "alternativeText","url"],
+        },
+        card: {
+          populate: {
+            image: {
+              fields: ["name", "alternativeText","url"],
+            }
+          }
+        },
+        plan: {
+          populate:["services","link" ],
+        },
+        form: {
+          populate:["input","button" ],
+        }
+      }
+    }
+  }
+}
+
+
+///api/landing-pages?populate[metadata][populate][image][populate]=true&populate[metadata][populate][image][fields][0]=name&populate[metadata][populate][image][fields][1]=alternativeText&populate[metadata][populate][image][fields][2]=url&populate[blocks][populate][link][populate]=true&populate[blocks][populate][image][fields][0]=name&populate[blocks][populate][image][fields][1]=alternativeText&populate[blocks][populate][image][fields][2]=url&populate[blocks][populate][card][populate][image][fields][0]=name&populate[blocks][populate][card][populate][image][fields][1]=alternativeText&populate[blocks][populate][card][populate][image][fields][2]=url&populate[blocks][populate][plan][populate][0]=services&populate[blocks][populate][plan][populate][1]=link&populate[blocks][populate][form][populate][0]=input&populate[blocks][populate][form][populate][1]=button
+
+
+
+//
+
+
+
+
+
+
+
+{
+  sort: ['title:asc'],
+  filters: {
+    title: {
+      $eq: 'hello',
+    },
+  },
+  populate: {
+    author: {
+      fields: ['firstName', 'lastName']
+    }
+  },
+  fields: ['title'],
+  pagination: {
+    pageSize: 10,
+    page: 1,
+  },
+  publicationState: 'live',
+  locale: ['en'],
+}
+
+///////////////////Strapi Querry ///////////////
