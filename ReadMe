@@ -123,3 +123,18 @@ postgres-# GRANT pg_write_all_data TO Satyam
 }
 
 ///////////////////Strapi Querry ///////////////
+///////////////////Strapi Middleware ///////////////
+//query map populate
+const populate={
+  populate:{
+    blocks:{
+      populate:true
+    }
+  }
+};
+
+//in middleware, before await next();
+ctx.query={
+populate,
+...ctx.query,
+}
